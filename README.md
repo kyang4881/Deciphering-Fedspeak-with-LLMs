@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/LLMs_background.jpg" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/LLMs_background.jpg" width="1200" />
 </p>
 
 ---
@@ -25,7 +25,7 @@ To improve these previous attempts, we believe that employing more advanced and 
 Recently, studies have been done to decipher FedSpeak using several Large Language Models. In particular, the work of Hansen & Kazinnik (2023) is a focal point of reference for this project. In their work, it was shown that the maximum accuracy attained using fine-tuned ChatGPT is 61%. The table below summarizes the key findings from the paper that we will use to evaluate our model performance.
 
 <p align="left">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/related_work.png" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/related_work.png" width="1200" />
 </p>
 
 ---
@@ -33,7 +33,7 @@ Recently, studies have been done to decipher FedSpeak using several Large Langua
 ## Approach
 
 <p align="center">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/modeling.png" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/modeling.png" width="1200" />
 </p>
 
 The project aimed to overcome the text multi-class classification task. Text classification is defined as the ability for the trained model to correctly label the provided text among the set of trained classes. A set of models were selected to tackle this task, based on recency, performance, and architectural complexity. The models were trained and tested on a combination of datasets described in the next section under dataset selection.
@@ -54,7 +54,7 @@ The initial predictions on the validation set, conducted without any fine-tuning
 Through fine-tuning on the FedSpeak dataset, the Flan T5 large model improves its understanding of the specific language patterns and contextual nuances present in Fed speeches, leading to a substantial improvement in performance. The fine-tuned model adapts its parameters to focus on the relevant features and patterns required for accurate classification. The resulting optimization allowed the model to achieve a 77% test accuracy, which is seven times higher than the accuracy of the zero-shot model. However, we have noticed a slight decrease in performance, as shown in Figure 1, when the augmented data was included, likely because the augmented data introduced some noise or variations that were not representative of the true patterns in the FedSpeak dataset. This noise could have led to confusion and hindered the model's ability to accurately classify the speeches. Additionally, the augmented data might have introduced biases or inconsistencies that affected the overall performance. 
 
 <p align="left">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/prompt.png" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/prompt.png" width="1200" />
 </p>
 
 ---
@@ -68,7 +68,7 @@ The available dataset includes two files:
 2. A file containing 200 randomly-drawn sentences from all the statements. Each sentence has been pre-labelled by human analysts with a hawkishness/dovishness score as defined in the table below. There are also some sentences labelled as “Remove” which indicates sentences that are irrelevant to monetary policies and should be removed in the data cleaning stage.
 
 <p align="center">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/fedspeak_table.png" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/fedspeak_table.png" width="1200" />
 </p>
 
 The dataset was sources from Andromeda Capital who provided two csv files with the meeting minutes statements and the sentiment score with labels ranging from 5 categories – “Hawkish, Mostly Hawkish, Neutral, Mostly Dovish and Dovish. Hawkish means that the Fed strongly expresses a belief that the economy is growing too quickly and may need to be slowed down through monetary policy. Whereas Dovish means that the Fed strongly expresses a belief that the economy is growing too slowly and may need to be stimulated through monetary policies. The cleaned dataset consisted of 200 statements and labels. 
@@ -88,7 +88,7 @@ Additionally, we have also deployed another method to evaluate our predictions b
 We built our models using specific configurations to conduct our experiments. The exact model configurations included details such as the architecture and type of model used, hyperparameters, learning rate, and training time. These configurations were chosen based on prior research and experimentation to ensure optimal performance, cost utilization, and reliable results.
 
 <p align="center">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/exp_details.png" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/exp_details.png" width="1200" />
 </p>
 
 ---
@@ -98,17 +98,17 @@ We built our models using specific configurations to conduct our experiments. Th
 Results of our models are shown in table below:
 
 <p align="center">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/results.png" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/results.png" width="1200" />
 </p>
 
 From our results, FLAN-T5 Large model’s accuracy is the highest, followed by DeBERTa Large model. The results we obtained managed to beat the baseline (Figure below) reported by Hansen & Kazinnik (2023), with our best model gaining a 16% increase in accuracy. This shows significant improvement can be achieved by our fine-tuning methods, which can be considered by Andromeda capital.
 
 <p align="center">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/comparison.png" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/comparison.png" width="1200" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/flan_family.png" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/flan_family.png" width="1200" />
 </p>
 
 ---
@@ -120,7 +120,7 @@ FLAN-T5 large (Fine-tuned) gave the best results compared to other models. This 
 Moving down the rank is the DeBERTa and FinBERT model. Both models may not perform as well as FLAN-T5 because they were not trained as extensively compared to FLAN-T5 model’s underlying pre-training tasks. However, our exploration of these BERT models suggests that we should potentially look at finetuning our Large Language Models using a lot more financial corpus. This is shown by FinBERT’s ability to achieve better accuracy compared to many other models we’ve tried even though it was still mainly based on the original BERT architecture, which is less advanced compared to GPT and DeBERTa architecture for example. Hence, this led us to believe that more advanced models trained on larger financial corpuses may potentially result in performance gain.
 
 <p align="center">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/timeseries.png" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/timeseries.png" width="1200" />
 </p>
 
 ---
@@ -132,7 +132,7 @@ Finally, based on our best model, we created a time series plot in the figure ab
 2)	Generate the frequencies of each label by date in the following format: 
 
 <p align="center">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/table_format.png" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/table_format.png" width="1200" />
 </p>
 
 3)	Choose the label with the max frequency and assign rates as shown below. Choose neutral if no max value.
@@ -775,7 +775,7 @@ trainer.evaluate()
 Training results printed
 
 <p align="center">
-  <img src="https://github.com/kyang4881/KYGit/blob/master/NLP%20Projects/LLMs/Fedspeak/docs/images/training_printouts.png" width="1200" />
+  <img src="https://github.com/kyang4881/Deciphering-Fedspeak-with-LLMs/blob/main/docs/images/training_printouts.png" width="1200" />
 </p>
 
 
