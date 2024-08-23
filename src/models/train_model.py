@@ -1,5 +1,8 @@
-from Fedspeak.src.models.preprocessing import preprocessor
-
+import nltk
+import numpy as np
+from transformers import DataCollatorForSeq2Seq, Seq2SeqTrainer, Seq2SeqTrainingArguments
+from sklearn.metrics import accuracy_score
+from preprocessing.preprocess import preprocessor
 
 class trainPipeline(preprocessor):
     """A class for computing evaluation metrics and training the model
@@ -148,7 +151,7 @@ class trainPipeline(preprocessor):
             args=training_args,
             train_dataset=self.tokenized_dict["train"],
             eval_dataset=self.tokenized_dict["test"],
-            tokenizer=tokenizer,
+            tokenizer=self.tokenizer,
             data_collator=data_collator,
             compute_metrics=self.compute_metrics
         )

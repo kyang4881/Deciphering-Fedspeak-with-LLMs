@@ -1,8 +1,4 @@
-import pandas as pd
-import numpy as np
-from datasets import DatasetDict, Dataset, concatenate_datasets
-import os
-
+from datasets import DatasetDict, Dataset
 
 class compileData:
     """A class for compiling the necessary json files into a dataset
@@ -72,45 +68,3 @@ class compileData:
             'test': test_dataset
         })
         return  nlp_dataset_dict_wtest
-
-class preprocessor:
-    """A Preprocessing class for tokenizing the features and labels
-    Args:
-        data_dict (dataset): A dataset containing train, validation, and test data
-        padding (bool/str): A boolean or string for specifying the padding requirement
-        truncation (bool): A boolean or string for specifying the truncation requirement
-        tokenizer (obj): A transformer object
-    """
-    def __init__(self, data_dict, padding, truncation, tokenizer):
-        self.data_dict = data_dict
-        self.padding = padding
-        self.truncation = truncation
-        self.tokenizer = tokenizer
-        tokenized_features = concatenate_datasets([self.data_dict["train"], self.data_dict["validation"], self.data_dict["test"]]).map(lambda x: tokenizer(x["features"], truncation=self.truncation))
-        tokenized_labels = concatenate_datasets([self.data_dict["train"], self.data_dict["validation"], self.data_dict["test"]]).map(lambda x: tokenizer(x["labels"], truncation=self.truncation))
-        self.max_source_length = max([len(x) for x in tokenized_features["features"]])
-        self.max_target_length = max([len(x) for x in tokenized_labels["labels"]])
-
-    def preprocess(self, data):
-        """Preprocessing the data by tokenizing the features and labels
-        Args:
-            data (dataset): A dataset containing the train, validation, and test data
-        Returns:
-            An updated dataset containing tokenized inputs
-        """
-        # Tokenize the features
-        model_inputs = tokenizer(data["features"], max_length=self.max_source_length, padding=self.padding, truncation=self.truncation)
-        # Tokenize the labels
-        labels = tokenizer(text_target=data["labels"], max_length=self.max_target_length, padding=self.padding, truncation=self.truncation)
-        # For max length padding, replace tokenizer.pad_token_id with -100 to ignore padding in the loss
-        if self.padding == "max_length": labels["input_ids"] = [[(l if l != tokenizer.pad_token_id else -100) for l in label] for label in labels["input_ids"]]
-        model_inputs["labels"] = labels["input_ids"]
-        return model_inputs
-
-    def map_inputs(self):
-        """Map the dataset to preprocess the train, validation, and test data
-        Returns:
-            A preprocessed dataset
-        """
-        tokenized_dict = self.data_dict.map(self.preprocess, batched=True)
-        return tokenized_dict

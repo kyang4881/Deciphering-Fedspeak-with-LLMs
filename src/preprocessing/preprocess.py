@@ -3,7 +3,6 @@ import numpy as np
 from datasets import DatasetDict, Dataset, concatenate_datasets
 import os
 
-
 class compileData:
     """A class for compiling the necessary json files into a dataset
     Args:
@@ -99,11 +98,11 @@ class preprocessor:
             An updated dataset containing tokenized inputs
         """
         # Tokenize the features
-        model_inputs = tokenizer(data["features"], max_length=self.max_source_length, padding=self.padding, truncation=self.truncation)
+        model_inputs = self.tokenizer(data["features"], max_length=self.max_source_length, padding=self.padding, truncation=self.truncation)
         # Tokenize the labels
-        labels = tokenizer(text_target=data["labels"], max_length=self.max_target_length, padding=self.padding, truncation=self.truncation)
+        labels = self.tokenizer(text_target=data["labels"], max_length=self.max_target_length, padding=self.padding, truncation=self.truncation)
         # For max length padding, replace tokenizer.pad_token_id with -100 to ignore padding in the loss
-        if self.padding == "max_length": labels["input_ids"] = [[(l if l != tokenizer.pad_token_id else -100) for l in label] for label in labels["input_ids"]]
+        if self.padding == "max_length": labels["input_ids"] = [[(l if l != self.tokenizer.pad_token_id else -100) for l in label] for label in labels["input_ids"]]
         model_inputs["labels"] = labels["input_ids"]
         return model_inputs
 
